@@ -1,38 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+  }
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+}
+
 .App {
-  text-align: center;
+    width: 100%;
+    height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#LinesPage {
+    width: 100%;
+    height: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#Navbar {
+    height:100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+p {
+    padding: 0px;
 }
 
-.App-link {
-  color: #61dafb;
+.topBarContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+    margin: 0;
+}
+
+.lineButton {
+    display: flex;
+    margin: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 90px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border-width: 0;
+    font-family: 'Jost';
+    font-weight: 400;
+}
+
+#gold {
+    background-color: gold;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#red {
+    background-color: red;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#blue {
+    background-color: blue;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#green {
+    background-color: green;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.divider{
+    width: 100%;
+    height: 2px;
+    background-color: rgb(240,240,240);
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.topBarContainer h1 {
+    display: flex;
+    font-family: 'Jost';
+    font-size: 4em;
+    font-weight: 470;
+}
+
+.topBarContainer button {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+#leftSidebar {
+    height: 100%;
+    width: 20%;
+    background-color: rgb(30, 30, 30)
 }
