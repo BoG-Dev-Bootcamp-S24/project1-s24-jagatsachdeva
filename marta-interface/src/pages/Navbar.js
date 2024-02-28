@@ -14,7 +14,25 @@ export const Navbar = () => {
                 <h1>COLOR</h1>
             </div>
             <div class="divider"></div>
-            <div id="leftSidebar"></div>
+            <div id="bottomPart">
+                <div id="leftSidebar">
+                    <p id="selectYour">Select your starting station.</p>
+                    <div id="locationButtonsContainer">
+                        <button class="locationButton">All Stations</button>
+                    </div>
+                </div>
+                <div id="directionBarAndDividerContainer">
+                    <div id="directionBar" class="topBarContainer">
+                        <button>Arriving</button>
+                        <button>Scheduled</button>
+                        <button>(North/East)bound</button>
+                        <button>(South/West)bound</button>
+                        
+                    </div>
+                    <div class="divider"></div>
+                </div>
+                
+            </div>
         </div>
     );
 }
