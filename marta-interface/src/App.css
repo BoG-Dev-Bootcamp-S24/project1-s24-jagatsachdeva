@@ -26,10 +26,6 @@ html, body {
     height: 100%;
 }
 
-#Navbar {
-    height:100%;
-}
-
 p {
     padding: 0px;
     margin: 0;
@@ -46,6 +42,7 @@ p {
 button {
     margin: 0;
     border: none;
+    cursor: pointer;
 }
 
 .lineButton {
@@ -64,15 +61,22 @@ button {
 }
 
 #gold {
-    background-color: gold;
+    background-color: rgb(255,215,0);
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#gold:hover {
+    background-color: rgb(209, 178, 0);
+}
+
+#red {
+    background-color: rgb(255 0 0);
     margin-left: 10px;
     margin-right: 10px;
 }
 
-#red {
-    background-color: red;
-    margin-left: 10px;
-    margin-right: 10px;
+#red:hover {
+    background-color: rgb(194, 0, 0);
 }
 
 #blue {
@@ -81,10 +85,18 @@ button {
     margin-right: 10px;
 }
 
+#blue:hover {
+    background-color: rgb(0, 0, 159);
+}
+
 #green {
-    background-color: green;
+    background-color: rgb(0,128,0);
     margin-left: 10px;
     margin-right: 10px;
+}
+
+#green:hover{
+    background-color: rgb(0, 95, 0);
 }
 
 .divider{
@@ -109,12 +121,6 @@ h1 {
     margin-top: 8px;
     margin-bottom: 8px;
     font-size: 1.1em;
-}
-
-#bottomPart {
-    height: 100%;
-    display: flex;
-    flex-direction: row;
 }
 
 #leftSidebar {
@@ -145,18 +151,22 @@ h1 {
 }
 
 .locationButton {
-    width: 80%;
+    width: 70%;
     height: 30px;
     display: flex;
     background-color: rgb(30,30,30);
-    border-bottom:white solid 0.5px;
+    border-bottom:rgb(150,150,150) solid 0.5px;
     font-family: "Jost";
     font-weight: 300;
     color: white;
     font-size: 1em;
     align-items: end;
     justify-content: center;
-    margin-top: 5px;
+    margin-top: 2px;
+}
+
+.locationButton:hover {
+    color: rgb(180, 180, 180);
 }
 
 #directionBar {
@@ -183,7 +193,39 @@ h1 {
     background-color: white;
 }
 
+#directionBar button:hover {
+    background-color: rgb(230,230,230);
+}
+
 #directionBarAndDividerContainer {
-    height: 54px;
     width: 100%;
+}
+
+#TrainList {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#dataBox{
+    height: 100%;
+    overflow: auto;
+    display:flex;
+}
+
+#loading {
+    display:flex;
+    justify-content: center;
+    height:100%;
+    align-items:
+}
+
+#loading p {
+    display:flex;
+    font-family: Jost;
+    font-size: 3em;
+    display: flex;
+    margin-left: 20px;
+    margin-top: 50px;
+
 }
