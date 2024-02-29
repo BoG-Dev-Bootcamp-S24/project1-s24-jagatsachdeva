@@ -151,7 +151,7 @@ h1 {
 }
 
 .locationButton {
-    width: 70%;
+    width: 80%;
     height: 30px;
     display: flex;
     background-color: rgb(30,30,30);
@@ -211,13 +211,13 @@ h1 {
     height: 100%;
     overflow: auto;
     display:flex;
+    flex-direction: column;
 }
 
 #loading {
     display:flex;
     justify-content: center;
     height:100%;
-    align-items:
 }
 
 #loading p {
@@ -227,5 +227,111 @@ h1 {
     display: flex;
     margin-left: 20px;
     margin-top: 50px;
+}
 
+.train {
+    display:flex;
+    width:100%;
+    height: 80px;
+    border-bottom: solid rgb(230,230,230);;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo {
+    margin-left: 20px;
+    display: flex;
+    height: 100%;
+    width: 200px;
+    background-image: url('./pages/images/martaLogo.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.infoBox {
+    height: 100%;
+}
+
+.timeBox {
+    height: 100%;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    font-family: "Jost";
+}
+
+.timeBox p {
+    margin-left: 10px;
+    font-size: 1.1em;
+    color:green;
+    font-weight: 500;
+}
+
+.infoBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.destination {
+    height: 50%;
+    width: 100%;
+}
+
+.details {
+    height: 50%;
+    width: 100%;
+}
+
+.destination {
+    display: flex;
+    align-items: end;
+}
+
+.destination p {
+    font-family: "Jost";
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    font-size: 1.2em;
+}
+
+.details {
+    display:flex;
+    padding-left: 10px;
+}
+
+.details p {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 2px;
+    font-family: "Jost";
+}
+
+.tag {
+    display: inline-block;
+    cursor: default;
+    font-family: "Jost";
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    border-radius: 6px;
+}
+
+.lineColorTag {
+    background-color: gold;
+}
+
+.delayedTag {
+    background-color: lightcoral;
+}
+
+.timeTag {
+    background-color: lightgreen;
+}
+
+.destinationText {
+    font-weight: 400px;
 }

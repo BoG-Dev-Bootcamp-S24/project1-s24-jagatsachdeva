@@ -4,31 +4,35 @@ import { Context } from "./LinesPage"
 export const TrainList = () => {
     const [currentColor, setCurrentColor] = useContext(Context);
     const [data, setData] = useState(null);
+    const [stations, setStations] = useState(null)
     const [currentFilter, setCurrentFilter] = useState("Arriving");
     const [boundButtons, setBoundButtons] = useState(["Northbound", "Southbound"]);
     const [currentStationFilter, setCurrentStationFilter] = useState("All Stations");
-
-
     const [isPending, setIsPending] = useState(true);
-    const goldLineStations = ["Doraville", "Chamblee", "Brookhaven", "Lenox", "Lindbergh Center", "Arts Center",
-    "Midtown", "North Avenue", "Civic Center", "Peachtree Center", "Five Points", "Garnett", "West End", 
-    "Lakewood", "East Point", "College Park", "Airport"];
-    const redLineStations = ["North Springs", "Sandy Springs", "Dunwoody", "Medical Center", "Buckhead", "Arts Center",
-    "Midtown", "North Avenue", "Civic Center", "Peachtree Center", "Five Points", "Garnett", "West End", 
-    "Lakewood", "East Point", "College Park", "Airport"];
-    const blueLineStations = ["Hamilton E. Holmes", "West Lake", "Ashby", "Vine City", "GWCC/CNN Center", "Five Points", "Georgia State", 
-    "King Memorial", "Inman Park", "Edgewood", "East Lake", "Decatur", "Avondale", "Kensington", "Indian"];
-    const greenLineStations = ["Bankhead", "Ashby", "Vine City", "GWCC/CNN Center", "Five Points", "Georgia State", 
-    "King Memorial", "Inman Park", "Edgewood"];
 
+
+    // fetch for stations
     useEffect(() => {
-        fetch("https://midsem-bootcamp-api.onrender.com/arrivals/" + currentColor.toUpperCase())
+        fetch(`https://midsem-bootcamp-api.onrender.com/stations/${currentColor.toUpperCase()}`)
+            .then(res => res.json())
+            .then((stations) => {
+                setStations(stations);
+            });
+    }, [currentColor])
+
+    // fetch for data
+    useEffect(() => {
+        fetch(`https://midsem-bootcamp-api.onrender.com/arrivals/${currentColor.toUpperCase()}`)
             .then(res => res.json())
             .then((data) => {
                 setData(data);
                 setIsPending(false);
             });
     }, [currentColor]);
+
+    useEffect(() => {
+        console.log(data);
+    },[data])
 
     useEffect(() => {
         if (currentColor === "red" || currentColor === "gold") {
@@ -52,17 +56,11 @@ export const TrainList = () => {
 
 
     const renderStations = () => {
-        let array;
-        if (currentColor === "red") {
-            array = redLineStations;
-        } else if (currentColor === "gold") {
-            array = goldLineStations; 
-        } else if (currentColor === "blue") {
-            array = blueLineStations;
-        } else if (currentColor === "green") {
-            array = greenLineStations;
+        if (!stations) {
+            return <p className="locationButton">Loading stations...</p>;
         }
-        return (array.map(currentStation => (
+
+        return (stations.map(currentStation => (
             <button className="locationButton" key={currentStation} onClick={() => {setCurrentStationFilter(currentStation)}}>{currentStation}</button>)
         ))
     }
@@ -81,12 +79,45 @@ export const TrainList = () => {
         return (buttonName);
     }
 
+    // const renderTrains = () => {
+    //     // filters: starting station, direction
+    //     let directionFilter = false;
+    //     let delayFilter = false;
+
+    //     if (currentFilter === "Arriving" || currentFilter === "Scheduled") {
+    //         delayFilter = true;
+    //     } else if (currentFilter === "Northbound" || currentFilter === "Southbound" || currentFilter === "Eastbound" || currentFilter === "Westbound") {
+    //         directionFilter = true;
+    //     } 
+
+    //     filteredData = data.filter(currentTrain => {
+    //         let returnDirectionValue;
+    //         let returnStationValue;
+    //         if (delayFilter) {
+    //             currentFilter === "Arriving" ? returnDirectionValue = currentTrain.DELAY === "TOS" : returnDirectionValue = currentTrain.DELAY !== "TOS";
+    //         } else if (directionFilter) {
+    //             if (currentColor === "gold" || currentColor === "red") {
+    //                 currentFilter === "Northbound" ? returnDirectionValue = currentTrain.DIRECTION === "N" : returnDirectionValue = currentTrain.DIRECTION !== "S";
+    //             } else {
+    //                 currentFilter === "Eastbound" ? returnDirectionValue = currentTrain.DIRECTION === "E" : returnDirectionValue = currentTrain.DIRECTION !== "W";
+    //             }
+    //         }
+    //         currentStationFilter !== "All Stations" ? returnStationValue = currentTrain.STATION === currentStationFilter.toUpperCase : returnStationValue = true;
+    //         return returnDirectionValue && returnStationValue;
+    //     })
+
+    //     return (
+
+    //     )
+        
+    // }
+
     return (
         <div  id="TrainList">
                 <div id="leftSidebar">
                     <p id="selectYour">Select your starting station.</p>
                     <div id="locationButtonsContainer">
-                        <button className="locationButton">All Stations</button>
+                        <button className="locationButton" onClick={() => {setCurrentStationFilter("All Stations")}}>All Stations</button>
                         {renderStations()} 
                     </div>
                 </div>
@@ -98,8 +129,74 @@ export const TrainList = () => {
                         <button onClick={() => {setCurrentFilter(boundButtons[1])}}>{determineButtonName(currentColor, false)}</button>
                     </div>
                     <div class="divider"></div>
-                    {!isPending && <div id="dataBox"></div>}
-                    {isPending && <div id="loading"><p>Loading...</p></div>}
+                    {!isPending && <div id="dataBox">
+                        <div className="train">
+                            <div className="logo"></div>
+                            <div className="infoBox">
+                                <div className="destination">
+                                    <p><span className="destinationText">Brookhaven Station</span> <span>&#8594;</span> <span className="destinationText">Doraville</span></p>
+                                </div>
+                                <div className="details">
+                                    <button className="tag lineColorTag">Gold</button>
+                                    <button className="tag delayedTag">Delayed</button>
+                                    <button className="tag timeTag">20 min</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="train">
+                            <div className="logo"></div>
+                            <div className="infoBox">
+                                <div className="destination">
+                                    <p><span className="destinationText">Brookhaven Station</span> <span>&#8594;</span> <span className="destinationText">Doraville</span></p>
+                                </div>
+                                <div className="details">
+                                    <button className="tag lineColorTag">Gold</button>
+                                    <button className="tag delayedTag">Delayed</button>
+                                    <button className="tag timeTag">20 min</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="train">
+                            <div className="logo"></div>
+                            <div className="infoBox">
+                                <div className="destination">
+                                    <p><span className="destinationText">Brookhaven Station</span> <span>&#8594;</span> <span className="destinationText">Doraville</span></p>
+                                </div>
+                                <div className="details">
+                                    <button className="tag lineColorTag">Gold</button>
+                                    <button className="tag delayedTag">Delayed</button>
+                                    <button className="tag timeTag">20 min</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="train">
+                            <div className="logo"></div>
+                            <div className="infoBox">
+                                <div className="destination">
+                                    <p><span className="destinationText">Brookhaven Station</span> <span>&#8594;</span> <span className="destinationText">Doraville</span></p>
+                                </div>
+                                <div className="details">
+                                    <button className="tag lineColorTag">Gold</button>
+                                    <button className="tag delayedTag">Delayed</button>
+                                    <button className="tag timeTag">20 min</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="train">
+                            <div className="logo"></div>
+                            <div className="infoBox">
+                                <div className="destination">
+                                    <p><span className="destinationText">Brookhaven Station</span> <span className="arrow">&#8594;</span> <span className="destinationText">Doraville</span></p>
+                                </div>
+                                <div className="details">
+                                    <button className="tag lineColorTag">Gold</button>
+                                    <button className="tag delayedTag">Delayed</button>
+                                    <button className="tag timeTag">20 min</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>}
+                    {isPending && <div id="loading"><p>Loading trains...</p></div>}
                 </div>
             </div>
     );
